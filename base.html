@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Mon Site d'API{% endblock %}</title>
+
+    {# BLOCK POUR LE STYLE INDIVIDUEL DE CHAQUE PAGE #}
+    {% block head_styles %}{% endblock %} 
+    
+</head>
+<body class="{% block page_class %}{% endblock %}"> 
+    
+    <header class="main-header">
+    <div class="container">
+        <nav class="main-nav">
+            <a href="{{ url_for('bonjour_page') }}" class="nav-brand">API Hub</a> 
+            <ul class="nav-list">
+                <li class="nav-item"><a href="{{ url_for('pokemon_page') }}" class="nav-link">Pokémon</a></li>
+                {# CORRECTION: L'endpoint s'appelle 'cat_facts' #}
+                <li class="nav-item"><a href="{{ url_for('cat_facts') }}" class="nav-link">Faits sur les Chats</a></li>
+                <li class="nav-item"><a href="{{ url_for('autre_api') }}" class="nav-link">Autre API</a></li>
+            </ul>
+        </nav>
+    </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 API Hub. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

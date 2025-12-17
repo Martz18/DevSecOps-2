@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Infos Pokémon : {{ pokemon_name | default('Chargement...') }}{% endblock %}
+
+{% block page_class %}page-pokemon{% endblock %}
+
+{% block content %}
+    <section class="pokemon-section card">
+        <h2 class="section-title">⚡ {{ pokemon_name | default('Chargement...') }} : Fiche Technique</h2>
+
+        {% if error %}
+             <div class="api-interface">
+                 <p class="error-message">{{ error }}</p>
+                 <p class="placeholder-text">Veuillez effectuer une nouvelle recherche.</p>
+             </div>
+        {% else %}
+            {# --- HEADER ET SPRITE --- #}
+            <div class="pokemon-header">
+                {% if sprite %}
+                    <img src="{{ sprite }}" alt="Sprite de {{ pokemon_name }}" class="pokemon-sprite">
+                {% endif %}
+
+                <div class="pokemon-info">
+                    <h2 class="pokemon-name">{{ pokemon_name | default('Pokémon Inconnu') }}</h2>
+                    
+                    <div class="pokemon-details">
+                        {# AFFICHAGE DU NUMÉRO DE POKÉDEX #}
+                        <p>Numéro de Pokédex : #{{ pokedex_number | default('??') }}</p> 
+                        
+                        {# AFFICHAGE DES TYPES #}
+                        {% if types %}
+                            <p>
+                                Type(s) : {% for type in types %}
+                                    <span class="pokemon-type type-{{ type.lower() }}">{{ type | capitalize }}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+
+                        {# AFFICHAGE DES TALENTS (Abilities) #}
+                        {% if abilities %}
+                            <p>
+                                Talent(s) : {% for ability in abilities %}
+                                    <span>{{ ability }}{% if not loop.last %}, {% endif %}</span>
+                                {% endfor %}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {# --- TABLEAU DES STATISTIQUES --- #}
+            {% if stats_pokemon %}
+                <div class="stats-container">
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Statistique</th>
+                                <th>Valeur de Base</th>
+                                <th>Barre de Progression (Max 255)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for stat in stats_pokemon %}
+                                <tr>
+                                    <td>{{ stat.nom }}</td>
+                                    <td>{{ stat.valeur }}</td>
+                                    <td>
+                                        {% set percentage = (stat.valeur / 255) * 100 %}
+                                        {% set stat_css_class = stat.nom.lower().replace(' ', '-') %}
+                                        
+                                        <div class="stat-bar-wrapper">
+                                            <div class="stat-bar stat-{{ stat_css_class }}" 
+                                                 style="width: {{ '%s%%' | format(percentage if percentage < 100 else 100) }};">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        {% endif %}
+    </section>
+{% endblock %}

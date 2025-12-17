@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Faits sur les Chats{% endblock %}
+
+{# Style Individuel : Ambiance Chat (Orange, Jaune, Doux) #}
+{% block head_styles %}
+    <style>
+        .page-cat-facts {
+            background-color: #fff9e6; /* Jaune très clair */
+        }
+        .cat-facts-section {
+            background-color: #ffffff;
+            border-left: 5px solid #ff9800; /* Orange chat */
+            padding: 30px;
+            text-align: left;
+        }
+        .cat-facts-section .section-title {
+            color: #ff9800;
+            border-bottom-color: #ffb74d;
+            text-align: center;
+        }
+        .api-interface {
+            background-color: #fff3e0;
+            border: 1px dashed #ffb74d;
+        }
+        #factDisplay {
+            border: 2px solid #ff9800;
+            background-color: #ffffff;
+            color: #333;
+            font-size: 1.2em;
+            font-style: normal;
+            font-family: 'Georgia', serif;
+        }
+        .interface-secondary .btn-secondary {
+            background: #4db6ac; /* Vert menthe pour le 'vent' */
+        }
+        .interface-secondary .btn-secondary:hover {
+            background: #00897b;
+        }
+        .result-secondary {
+             border: 2px solid #4db6ac;
+        }
+    </style>
+{% endblock %}
+
+{% block page_class %}page-cat-facts{% endblock %}
+
+{% block content %}
+    <section class="api-section cat-facts-section card">
+        <h2 class="section-title">🐾 Faits sur les Chats</h2>
+        <p style="text-align: center;">Découvrez des faits aléatoires sur nos amis félins grâce à l'API Cat Facts.</p>
+        
+        <div class="api-interface">
+            <button id="catFactButton" class="btn btn-primary">Afficher un Fait sur les Chats</button>
+            <p id="factDisplay" class="result-display placeholder-text">Cliquez sur le bouton pour un fait...</p>
+        </div>
+
+        <div class="api-interface interface-secondary">
+            <button id="salut" class="btn btn-secondary">Dis moi salut ou ça va mal se passer.</button>
+            <p id="vent" class="result-display result-secondary placeholder-text">Est-ce que je te fous un vent hmm...</p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.getElementById('catFactButton').addEventListener('click', () => {
+            const factDisplay = document.getElementById('factDisplay');
+            factDisplay.textContent = 'Chargement...';
+            factDisplay.classList.remove('placeholder-text');
+
+            // CORRECTION: Utilisation de l'endpoint d'API AJAX correct
+            fetch('{{ url_for("api_cat_fact") }}') 
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    // L'API catfact.ninja retourne directement un objet avec la clé 'fact'
+                    factDisplay.textContent = data.fact; 
+                })
+                .catch(error => {
+                    factDisplay.textContent = '❌ Erreur lors de la communication avec le serveur.';
+                    console.error('Fetch error:', error);
+                });
+        });
+
+        document.getElementById('salut').addEventListener('click', () => {
+            const ventDisplay = document.getElementById('vent');
+            ventDisplay.textContent = 'Attente de réponse...';
+            ventDisplay.classList.remove('placeholder-text');
+            
+            // CORRECTION: Utilisation de l'endpoint d'API AJAX correct
+            fetch('{{ url_for("api_bonjour") }}')
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    // L'endpoint api_bonjour retourne la clé 'response'
+                    ventDisplay.textContent = data.response;
+                })
+                .catch(error => {
+                    ventDisplay.textContent = "❌ Erreur serveur.";
+                    console.error('Fetch error:', error);
+                })
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Autre API{% endblock %}
+
+{# Style Individuel : Ambiance Tech/Dev, Tons Sombres #}
+{% block head_styles %}
+    <style>
+        .page-autre-api {
+            background-color: #e9ecef; /* Gris clair */
+        }
+        .example-section {
+            background: #ffffff;
+            border: 1px solid #ced4da;
+            padding: 35px;
+        }
+        .example-section .section-title {
+            color: #495057; /* Gris foncé */
+            border-bottom: 2px dashed #495057;
+        }
+        .api-interface {
+            background-color: #f1f3f5; /* Gris léger */
+        }
+        #quoteDisplay {
+            background-color: #343a40; /* Fond foncé */
+            color: #e9ecef; /* Texte clair */
+            font-style: italic;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .btn-primary {
+            background: #28a745; /* Vert succès */
+        }
+        .btn-primary:hover {
+            background: #1e7e34;
+        }
+    </style>
+{% endblock %}
+
+{% block page_class %}page-autre-api{% endblock %}
+
+{% block content %}
+    <section class="api-section example-section card">
+        <h2 class="section-title">💡 API Exemple : Citation Aléatoire</h2>
+        <p>Cette page est un espace réservé pour votre deuxième API. Vous pouvez y intégrer un appel API pour des blagues, des citations, ou autre chose.</p>
+        
+        <div class="api-interface">
+            <button id="quoteButton" class="btn btn-primary">Afficher une Citation</button>
+            <p id="quoteDisplay" class="result-display placeholder-text">Citation en attente...</p>
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.getElementById('quoteButton').addEventListener('click', () => {
+            const quoteDisplay = document.getElementById('quoteDisplay');
+            quoteDisplay.textContent = 'Recherche de sagesse...';
+            quoteDisplay.classList.remove('placeholder-text');
+
+            // --- REMPLACER AVEC VOTRE VÉRITABLE APPEL API ---
+            setTimeout(() => {
+                quoteDisplay.textContent = "Le style, c'est ce qui reste quand on a tout oublié.";
+            }, 1000);
+            // ------------------------------------------------
+        });
+    </script>
+{% endblock %}
