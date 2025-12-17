@@ -1,0 +1,37 @@
+		# ----------------------------------------------------
+# DÉPENDANCES DE BASE DE L'APPLICATION (Production)
+# ----------------------------------------------------
+
+# 1. Framework Web (Nécessaire pour les routes et servir le HTML)
+#    Nous gardons Flask, car il est léger et utilise Jinja2.
+Flask
+
+# 2. Moteur de templating (Pour le rendu du HTML)
+#    Jinja2 est le moteur que vous utilisez.
+Jinja2
+
+# 3. Requêtes API (Pour faire des appels HTTP sortants)
+#    'requests' est la librairie standard.
+requests
+
+# ----------------------------------------------------
+# OUTILS ESSENTIELS DE DÉVELOPPEMENT/TEST (Souvent nécessaires en Docker/CI)
+# ----------------------------------------------------
+
+# 4. Tests Unitaires
+#    Pytest est le framework de test le plus populaire et puissant en Python.
+#    Il vous permet de valider la logique de votre code.
+pytest
+
+# 5. Linting/Qualité de Code
+#    Flake8 est indispensable pour s'assurer que votre code respecte les standards (PEP 8).
+#    Il doit tourner en CI avant le build.
+flake8
+
+# 6. Débogage
+#    Icecream est une librairie très pratique pour remplacer la fonction print() lors du débogage.
+icecream
+
+# 7. Documentation des dépendances
+#    pip-tools est très utile pour gérer, verrouiller et compiler des dépendances de manière propre.
+pip-tools
