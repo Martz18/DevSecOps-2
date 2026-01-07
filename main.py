@@ -14,11 +14,10 @@ app = FastAPI(
 # 1. CONFIGURATION SÉCURITÉ (CORS)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=["http://localhost:5678"],
+    allow_methods=["GET"],
     allow_headers=["*"],
 )
-
 # 2. SERVIR LES FICHIERS STATIQUES (CSS/JS)
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
