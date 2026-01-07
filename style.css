@@ -31,8 +31,19 @@ h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 3px 3px 10px 
     background: rgba(0, 0, 0, 0.7); border: 5px solid var(--bois-sombre); padding: 20px;
 }
 
+.quest-board2 {
+    display: flex; flex-direction: column; gap: 20px; width: 90%; max-width: 1200px; height: 70%;
+    background: rgba(0, 0, 0, 0.7); border: 5px solid var(--bois-sombre); padding: 20px;
+}
+
 .column { flex: 1; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.03); }
 .column h2 { 
+    font-family: 'Cinzel', serif; font-size: 1rem; margin: 0; padding: 12px;
+    background: var(--bois-sombre); border-bottom: 2px solid var(--bordure);
+}
+
+.ligne { flex: 2; display: flex; flex-direction: row; background: rgba(255, 255, 255, 0.03); align-items: flex-start; }
+.ligne h2 { 
     font-family: 'Cinzel', serif; font-size: 1rem; margin: 0; padding: 12px;
     background: var(--bois-sombre); border-bottom: 2px solid var(--bordure);
 }
@@ -90,13 +101,12 @@ h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 3px 3px 10px 
 
 .image-btn2 {
     position: absolute;
-    right: 40px;
-    top: 40%;
-    left: -85%;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
+    left: 0;
+    margin-left: 3%;;
 }
 
 .image-btn2 img {
@@ -104,4 +114,31 @@ h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 3px 3px 10px 
     height: auto;
     border: 4px solid var(--bois-sombre);
     box-shadow: 4px 4px 10px #000;
+}
+
+.ligne input, .ligne textarea {
+    width: 97.5%;             /* Largeur presque totale */
+    padding: 15px;          /* Espace intérieur (agrandit la zone) */
+    font-size: 1.2rem;      /* Texte plus grand pour mieux lire */
+    margin-top: 6vh;       /* Crée de l'espace par rapport au titre H2 */
+    margin-left: -8.3vw;;
+    background: var(--parchemin);
+    border: 3px solid var(--bois-sombre);
+    color: var(--bois-sombre);
+    font-family: 'MedievalSharp', cursive;
+}
+
+/* Spécifiquement pour la description (plus haute) */
+.ligne textarea {
+    height: 9vh;          /* Hauteur fixe plus grande */
+    resize: none;           /* Empêche l'utilisateur de déformer le cadre */
+}
+
+.ligne input {
+    margin-top: 8vh;
+}
+
+.ligne .espacement {
+    margin-top: 10vh;
+    margin-left: -10.6vw;
 }

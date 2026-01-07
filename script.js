@@ -20,6 +20,39 @@ function ouvrirTaverne2() {
     actualiserAffichage();
 }
 
+async function ajouterNouvelleQuete() {
+    const name = document.getElementById('quest-name').value;
+    const description = document.getElementById('quest-desc').value;
+    const reward = document.getElementById('quest-reward').value;
+
+    if (!name || !description) return alert("Remplissez tous les champs !");
+
+    const nouvelleQuete = {
+        name: name,
+        description: description,
+        reward: parseInt(reward),
+        status: "disponible"
+    };
+
+    try {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(nouvelleQuete)
+        });
+
+        if (response.ok) {
+            // Vider les champs
+            document.getElementById('quest-name').value = "";
+            document.getElementById('quest-desc').value = "";
+            // Retourner à la taverne et rafraîchir
+            ouvrirTaverne2();
+        }
+    } catch (e) {
+        console.error("Erreur lors de l'ajout :", e);
+    }
+}
+
 async function actualiserAffichage() {
     try {
         const response = await fetch(API_URL);
