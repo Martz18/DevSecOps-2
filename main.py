@@ -5,7 +5,11 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 # Initialisation de l'application FastAPI
-app = FastAPI(title="API de Gestion de Quêtes")
+app = FastAPI(
+    title="API de Gestion de Quêtes",
+    docs_url=None,
+    quests_url=None
+)
 
 # --- CONFIGURATION SÉCURITÉ (CORS) ---
 # Autorise ton navigateur à faire des requêtes vers l'API
@@ -23,7 +27,6 @@ async def read_index():
     return FileResponse("templates/index.html")
 
 # Montage du dossier 'templates' pour que le HTML accède aux fichiers statiques
-# Note : On l'appelle "/static" dans l'URL pour la convention
 app.mount("/static", StaticFiles(directory="templates"), name="static")
 
 # --- MODÈLE DE DONNÉES ---
