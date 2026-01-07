@@ -50,5 +50,5 @@ jobs:
           push: true
           # Double tag : 'latest' pour l'usage courant, et le 'SHA' pour la traçabilité
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/DevSecOps_2_Guardia:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/DevSecOps_2_Guardia:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops_2_guardia:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops_2_guardia:${{ github.sha }}
