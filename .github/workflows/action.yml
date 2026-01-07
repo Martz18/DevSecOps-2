@@ -1,0 +1,40 @@
+name: Github action pour Axel
+
+on:
+  push:
+    branches: [ "Axel" ]
+  pull_request:
+    branches: [ "Axel" ]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Récupération du code
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: 3. Installation des outils
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit pip-audit ruff
+          # On installe les libs pour que Ruff et Pip-audit puissent analyser le projet
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 4. Audit des dépendances (Pip-audit)
+        run: pip-audit -r requirements.txt
+
+      - name: 5. Analyse de sécurité complète (Bandit)
+        # On exclut 'templates' car ce n'est pas du code Python
+        run: bandit -r . -v -x ./templates
+
+      - name: 6. Vérification de la propreté du code (Ruff)
+        run: ruff check .
+
+      - name: 7. Construction de l'image Docker (Python 3.10-slim)
+        run: docker build -t mon-api-user1:latest .
