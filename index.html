@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>La Taverne du Dragon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="page-entree" class="screen active">
+        <h1>LA TAVERNE DU DRAGON</h1>
+        <button class="main-btn" onclick="ouvrirTaverne()">ENTRER DANS LA TAVERNE</button>
+    </section>
+
+    <section id="page-taverne" class="screen">
+        <h1>TABLEAU DES CONTRATS</h1>
+        <div class="quest-board">
+            <div class="column">
+                <h2>DISPONIBLES</h2>
+                <div id="available-quests" class="scroll-zone"></div>
+            </div>
+            <div class="column">
+                <h2>EN COURS</h2>
+                <div id="in-progress-quests" class="scroll-zone"></div>
+            </div>
+            <div class="column">
+                <h2>TERMINÉES</h2>
+                <div id="completed-quests" class="scroll-zone"></div>
+            </div>
+        </div>
+        <button class="image-btn" onclick="ouvrirPost()">
+            <img src="./images/arrow.png">
+        </button>
+    </section>
+
+    <section id="page-post" class="screen">
+        <h1>POSTER DES CONTRATS</h1>
+        <div class="quest-board">
+        </div>
+        <button class="image-btn2" onclick="ouvrirTaverne2()">
+            <img src="./images/arrow2.png">
+        </button>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
