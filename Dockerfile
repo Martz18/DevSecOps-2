@@ -13,5 +13,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 5. Copier ton code (main.py)
 COPY . .
 
-# 6. Lancer l'application
+# 6. Créer un User 
+RUN useradd -m myuser
+USER myuser
+
+# 7. Lancer l'application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5678"]
