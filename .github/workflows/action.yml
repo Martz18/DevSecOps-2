@@ -1,10 +1,10 @@
-name: Github action pour User
+name: Github action pour Axel
 
 on:
   push:
-    branches: [ "User" ]
+    branches: [ "Axel" ]
   pull_request:
-    branches: [ "User" ]
+    branches: [ "Axel" ]
 
 jobs:
   pipeline:
