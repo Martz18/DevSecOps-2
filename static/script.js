@@ -1,5 +1,4 @@
-const API_URL = "http://localhost:5678/quests";
-// Liste pour stocker les IDs des quêtes qui viennent d'être terminées
+const API_URL = "/quests"; 
 let quetesEnSursis = [];
 
 function ouvrirTaverne() {
@@ -19,13 +18,12 @@ async function actualiserAffichage() {
             "terminée": document.getElementById('completed-quests')
         };
 
-        // On vide les colonnes
         Object.values(zones).forEach(z => z.innerHTML = "");
 
         const compteurs = { "disponible": 0, "en cours": 0, "terminée": 0 };
-        const totalParZone = { "disponible": 0, "en cours": 0, "terminée": 0 };
+        const totalParZone = { "disponible": 0, "en cours : 0", "terminée": 0 };
 
-        // Filtrage : On n'affiche dans "terminée" que celles qui sont dans la liste des 15 secondes
+        // Filtrage des quêtes terminées
         const quetesAAfficher = quests.filter(q => {
             if (q.status === "terminée") {
                 return quetesEnSursis.includes(q.id);
@@ -33,14 +31,15 @@ async function actualiserAffichage() {
             return true;
         });
 
-        // Calcul des totaux pour les badges
-        quetesAAfficher.forEach(q => totalParZone[q.status]++);
+        // Comptage total par statut
+        quetesAAfficher.forEach(q => {
+            if (totalParZone.hasOwnProperty(q.status)) totalParZone[q.status]++;
+        });
 
-        // Création des cartes
+        // Affichage des cartes (limite de 3 par zone)
         quetesAAfficher.forEach(q => {
             if (compteurs[q.status] < 3) {
                 const card = document.createElement('div');
-                // Ajout d'une classe spéciale pour les quêtes terminées
                 card.className = `quest-card ${q.status === 'terminée' ? 'just-finished' : ''}`;
                 
                 card.innerHTML = `
@@ -58,7 +57,7 @@ async function actualiserAffichage() {
             }
         });
 
-        // Ajout des badges si plus de 3 quêtes
+        // Badges d'attente
         Object.keys(zones).forEach(status => {
             const reste = totalParZone[status] - 3;
             if (reste > 0) {
@@ -78,13 +77,13 @@ async function passerEtape(id) {
         const response = await fetch(`${API_URL}/${id}`, { method: 'PUT' });
         const queteMiseAJour = await response.json();
 
-        // Si la quête passe en "terminée", on lance le compte à rebours de 15s
         if (queteMiseAJour.status === "terminée") {
             quetesEnSursis.push(id);
+            // On attend 15 secondes (durée de ton animation CSS) avant de supprimer
             setTimeout(() => {
                 quetesEnSursis = quetesEnSursis.filter(qid => qid !== id);
                 actualiserAffichage();
-            }, 5000); 
+            }, 15000); 
         }
         actualiserAffichage();
     } catch (e) {
