@@ -89,4 +89,17 @@ L’application utilise les composants suivants :
 * **🛡️ Rate Limiting** : Limitation des requêtes pour éviter que la base temporaire ne soit saturée par des scripts.
 
 ---
+
+## 👥 Crédits & Collaborateurs
+
+Ce projet a été développé avec passion par :
+
+| Rôle | Nom / Pseudonyme | GitHub / Contact |
+| :--- | :--- | :--- |
+| **Developer / DevSecOps** | **[Ton Nom/Pseudo]** | [@ton_github](https://github.com/ton_profil) |
+| **Developer / DevSecOps** | **[Nom Collaborateur 1]** | [@profil_github](https://github.com/profil) |
+| **Developer / DevSecOps** | **[Nom Collaborateur 2]** | [@profil_github](https://github.com/profil) |
+
+---
+
 *Dernière mise à jour : Janvier 2026*
