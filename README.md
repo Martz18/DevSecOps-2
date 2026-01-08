@@ -21,7 +21,7 @@ Un workflow GitHub Actions (fichier dans .github/workflows/) est déclenché à 
 
   git clone https://github.com/<organisation>/DevSecOps-2.git
   cd DevSecOps-2
-  git checkout Axel
+  git checkout main
   
 2) Créer un environnement virtuel (optionnel mais recommandé) :
 
@@ -44,25 +44,27 @@ python main.py
 
 2) Lancer un conteneur :
 
-  docker run --rm -p 8000:8000 devsecops2-app
+  docker run --rm -p 5678:5678 devsecops2-app
 
 3) Accéder au service via l’URL http://localhost:5678 selon la configuration de l’application.
 
   Problèmes rencontrés
   
   - Problèmes de configuration du workflow GitHub Actions : erreurs d’installation de dépendances ou de version de Python non compatible.
+  - Autres problèmes Github Actions : Github action reconnaît les assert pour pytest comme une erreur de sévérité low.
   - Difficultés avec la construction de l’image Docker (permissions, chemins de fichiers, dépendances manquantes ou variables d’environnement).
   - Bugs applicatifs liés à la gestion des entrées utilisateurs ou à la communication entre les composants (par exemple templates non trouvés ou erreurs d’import).
 
   Solutions ou contournements
 
   - Ajustement du fichier de workflow pour définir la bonne version de Python, installer pip et utiliser pip install -r requirements.txt.
+  - Faire en sorte que le fichier yml ignore le dossier test.
   - Modification du Dockerfile pour copier correctement les fichiers nécessaires et définir un utilisateur non-root lorsque c’est possible.
   - Correction du code Python et des chemins vers les templates afin d’éviter les erreurs au lancement (tests manuels et corrections itératives).
 ​
   Améliorations possibles (boucle suivante)
 
-  - Ajouter des tests unitaires et les exécuter automatiquement dans GitHub Actions pour valider chaque modification.
-  - Intégrer un outil d’analyse statique de sécurité (par exemple bandit) et éventuellement un linter (comme flake8 ou pylint).
-  - Renforcer la sécurité de l’image Docker (utilisateur non-root, réduction de la taille de l’image, utilisation d’une base slim, scan d’image).
-  - Améliorer la documentation utilisateur et technique, par exemple avec des schémas d’architecture et des exemples d’appels à l’API ou de pages web
+  - Utiliser des images de base minimalistes (type alpine) pour réduire le poids du projet et supprimer les outils système inutiles qui pourraient être exploités.
+  - Mettre en place un contrôle strict sur les données envoyées à l'API (longueur des textes, type de nombres) pour empêcher l'application de planter si un utilisateur envoie n'importe quoi.
+  - Configurer l'API pour qu'elle renvoie des en-têtes HTTP de sécurité (comme X-Content-Type-Options) afin de mieux protéger le navigateur ou le client qui appelle l'API.
+  - Ajouter une règle pour limiter le nombre de requêtes par minute depuis une même adresse IP, afin d'éviter que l'API locale ne soit saturée par des tests trop intensifs.
