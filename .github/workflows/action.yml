@@ -58,7 +58,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH,MEDIUM' # Ajout de MEDIUM ici
+          severity: 'CRITICAL,HIGH,MEDIUM, LOW'
 
       - name: 10. Push de l'image sur Docker Hub
         # Condition de sécurité ici
