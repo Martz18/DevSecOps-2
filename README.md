@@ -15,7 +15,7 @@ L'application est une **API REST** baptisée **« La Taverne du Dragon »**. Ell
 
     <img width="2559" height="1394" alt="Capture d&#39;écran 2026-01-08 220047" src="https://github.com/user-attachments/assets/ae827a78-23ec-4d3b-ac33-dfa1f1cf1d38" />
 
-3.  **Le Gestionnaire de Quêtes** : Le cœur de l'application. Cette page affiche les quêtes disponibles, permet de les accepter et de les marquer comme accomplies.
+3.  **Le Tableau des contrats** : Le cœur de l'application. Cette page affiche les contrats disponibles, permet de les accepter et de les marquer comme accomplis.
 
     <img width="2557" height="1392" alt="Capture d&#39;écran 2026-01-08 220111" src="https://github.com/user-attachments/assets/9397629d-c098-4a8c-9e64-248a2e07cfae" />
 
