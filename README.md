@@ -96,9 +96,9 @@ Ce projet a été développé avec passion par :
 
 | Rôle | Nom / Pseudonyme | GitHub / Contact |
 | :--- | :--- | :--- |
-| **Developer / DevSecOps** | **[Ton Nom/Pseudo]** | [@ton_github](https://github.com/ton_profil) |
-| **Developer / DevSecOps** | **[Nom Collaborateur 1]** | [@profil_github](https://github.com/profil) |
-| **Developer / DevSecOps** | **[Nom Collaborateur 2]** | [@profil_github](https://github.com/profil) |
+| **Developer / DevSecOps** | **[Alexandre Caré/Martz18]** | [@Martz18](https://github.com/Martz18) |
+| **Developer / DevSecOps** | **[Axel Girard/Wolf0513]** | [@Wolf0513](https://github.com/Wolf0513) |
+| **Developer / DevSecOps** | **[Hakao747]** | [@Hakao747](https://github.com/Hakao747) |
 
 ---
 
