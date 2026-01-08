@@ -19,7 +19,7 @@ Ce projet a été réalisé dans le cadre du module **DevSecOps**. L'objectif es
 
 L’application utilise les composants suivants :
 * **Logique :** `main.py` pour le code principal et `requirements.txt` pour les dépendances.
-* **Interface :** Un dossier `templates/` pour le html, avec un dossier static/ pour le css et le js.
+* **Interface :** Un dossier `templates/` pour le html, avec un dossier `static/` pour le css et le js.
 * **Containerisation :** Un `Dockerfile` définissant l'image d'exécution.
 * **Automatisation :** Un workflow GitHub Actions qui s'exécute à chaque *push* pour installer les dépendances et builder l'image.
 
