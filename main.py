@@ -38,6 +38,17 @@ db_quest = [
     Quest(id=4, name="Menace Gobeline", description="Éliminer le campement au nord.", reward=100)
 ]
 
+#7. NOUVELLE AJOUT, PERMET DE RAJOUTER DES QUÊTES
+@app.post("/quests")
+async def create_quest(quest: Quest):
+    # Calcul de l'ID suivant automatiquement
+    new_id = max([q.id for q in db_quest], default=0) + 1
+    quest.id = new_id
+    
+    # Ajout à la liste
+    db_quest.append(quest)
+    return quest
+
 # 5. ROUTES FRONTEND
 @app.get("/")
 async def read_index():
