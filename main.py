@@ -40,11 +40,8 @@ db_quest = [
 #7. NOUVELLE AJOUT, PERMET DE RAJOUTER DES QUÊTES
 @app.post("/quests")
 async def create_quest(quest: Quest):
-    # Calcul de l'ID suivant automatiquement
     new_id = max([q.id for q in db_quest], default=0) + 1
     quest.id = new_id
-    
-    # Ajout à la liste
     db_quest.append(quest)
     return quest
 
