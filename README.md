@@ -61,7 +61,7 @@ L’application utilise les composants suivants :
 
 ---
 
-## 📈 Roadmap & Améliorations (Prochaine itération)
+## 📈 Améliorations possibles (boucle suivante)
 
 > [!IMPORTANT]
 > **Focus : Sécurité offensive et optimisation des ressources.**
