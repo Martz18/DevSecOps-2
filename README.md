@@ -9,11 +9,18 @@
 Ce projet a été réalisé dans le cadre du module **DevSecOps**. L'objectif est de mettre en pratique l'intégration continue, la livraison continue et la sécurité au sein d'un service applicatif Python containerisé.
 
 ### 🍺 L'Application : Tavernier
-L'application est une **API REST** baptisée **« Tavernier – Gestionnaire de quêtes »**. Elle plonge l'utilisateur dans un univers de jeu de rôle où il peut gérer les contrats d'une taverne. L'expérience se scinde en trois sections principales :
+L'application est une **API REST** baptisée **« La Taverne du Dragon »**. Elle plonge l'utilisateur dans un univers de jeu de rôle où il peut gérer les contrats d'une taverne. L'expérience se scinde en trois sections principales :
 
 1.  **La Porte de la Taverne (Accueil)** : La page d'entrée permettant d'accéder à l'interface de la taverne.
-2.  **Le Gestionnaire de Quêtes** : Le cœur de l'application. Cette page affiche les quêtes disponibles, permet de les accepter et de les marquer comme accomplies.
-3.  **Le Tableau d'Affichage (Poster une quête)** : Accessible depuis le gestionnaire, cette page permet de soumettre de nouveaux contrats en précisant le **nom**, la **description** et le **montant de la récompense**.
+
+    <img width="2559" height="1394" alt="Capture d&#39;écran 2026-01-08 220047" src="https://github.com/user-attachments/assets/ae827a78-23ec-4d3b-ac33-dfa1f1cf1d38" />
+
+3.  **Le Gestionnaire de Quêtes** : Le cœur de l'application. Cette page affiche les quêtes disponibles, permet de les accepter et de les marquer comme accomplies.
+
+    <img width="2557" height="1392" alt="Capture d&#39;écran 2026-01-08 220111" src="https://github.com/user-attachments/assets/9397629d-c098-4a8c-9e64-248a2e07cfae" />
+
+5.  **Le Tableau d'Affichage (Poster une quête)** : Accessible depuis le gestionnaire, cette page permet de soumettre de nouveaux contrats en précisant le **nom**, la **description** et le **montant de la récompense**.
+   
     <img width="2559" height="1393" alt="image" src="https://github.com/user-attachments/assets/2b7c5496-7be4-4dc3-a6de-49c36bc1f3e0" />
 
 
