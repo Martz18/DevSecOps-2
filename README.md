@@ -19,79 +19,59 @@ Ce projet a été réalisé dans le cadre du module **DevSecOps**. L'objectif es
 
 L’application utilise les composants suivants :
 * **Logique :** `main.py` pour le code principal et `requirements.txt` pour les dépendances.
-* **Interface :** Un dossier `templates/` pour le html, avec un dossier `static/` pour le css et le js.
+* **Interface :** Un dossier `templates/` pour le HTML, avec un dossier `static/` pour le CSS et le JS.
 * **Containerisation :** Un `Dockerfile` définissant l'image d'exécution.
-* **Automatisation :** Un workflow GitHub Actions qui s'exécute à chaque *push* pour installer les dépendances et builder l'image.
+* **Automatisation :** Un workflow GitHub Actions qui s'exécute à chaque *push* pour valider le code et builder l'image.
 
 ---
 
-## 🚀 Instructions de lancement
-
- ## 🏗️ PARTIE I : Protocoles de Lancement
-
-### 💻 A) Installation en Local
-> **Note :** Assurez-vous d'avoir Python 3.x installé sur votre machine.
-
-1.  **Récupération du projet**
-    ```bash
-    git clone [https://github.com/](https://github.com/)<organisation>/DevSecOps-2.git
-    cd DevSecOps-2
-    git checkout main
-    ```
-
-2.  **Configuration de l'environnement**
-    ```bash
-    python -m venv venv
-    # Activation (Windows) :  .\venv\Scripts\activate
-    # Activation (Unix)    :  source venv/bin/activate
-    ```
-
-3.  **Installation & Exécution**
-    ```bash
-    pip install -r requirements.txt
-    python main.py
-    ```
-
----
-
-### 🐳 B) Lancement avec Docker
-| Étape | Commande | Description |
-| :--- | :--- | :--- |
-| **1. Build** | `docker build -t devsecops2-app .` | Construction de l'image |
-| **2. Run** | `docker run --rm -p 5678:5678 devsecops2-app` | Lancement du conteneur |
-| **3. Test** | Accès via `http://localhost:5678` | Vérification service |
-
----
-
-## 🛠️ PARTIE II : Analyse Post-Déploiement
-
-### ⚠️ Problèmes rencontrés
-* ❌ **CI/CD :** Conflits de versions Python dans les workflows GitHub Actions.
-* ❌ **Faux Positifs :** Les `assert` de Pytest marqués comme vulnérabilités (Sévérité : Low).
-* ❌ **Docker :** Erreurs de permissions et dépendances manquantes lors du build.
-* ❌ **Runtime :** Erreurs d'importation et templates HTML introuvables.
-
-### ✅ Solutions appliquées
-* 🔧 **Workflow :** Stabilisation du fichier YAML avec des versions de Python explicites.
-* 🔧 **Whitelist :** Configuration de l'analyseur pour ignorer le répertoire `/test`.
-* 🔧 **Hardening :** Passage en utilisateur **non-root** dans le Dockerfile.
-* 🔧 **Fixes :** Refactorisation des chemins relatifs pour la gestion des templates.
-
----
-
-## 🚀 PARTIE III : Roadmap & Améliorations
+## 🚀 Instructions de lancement (Docker Hub)
 
 > [!TIP]
-> **Objectif : Optimisation du Score de Sécurité & Performance**
+> **Méthode recommandée :** L'image est déjà pré-construite, sécurisée et disponible publiquement sur Docker Hub.
 
-* **🛡️ Sécurisation des Images**
-    * Transition vers des images **Alpine** (réduction de la surface d'attaque).
-* **🛡️ Validation d'Entrée (Input Sanitization)**
-    * Contrôle strict des types et longueurs de données pour prévenir les injections.
-* **🛡️ Headers de Sécurité**
-    * Implémentation de `X-Content-Type-Options` et `Strict-Transport-Security`.
-* **🛡️ Protection DOS**
-    * Mise en place d'un **Rate Limiter** par adresse IP.
+1.  **Récupérer l'image officielle** :
+    ```bash
+    docker pull croustiii/devsecops_2_guardia:latest
+    ```
+
+2.  **Lancer le conteneur** :
+    ```bash
+    docker run --rm -d -p 5678:5678 --name devsecops-app croustiii/devsecops_2_guardia
+    ```
+
+3.  **Accéder au service** :
+    > 🌐 URL locale : [http://localhost:5678](http://localhost:5678)
 
 ---
-*Dernière mise à jour : 2026*
+
+## 🛠️ Analyse Post-Déploiement
+
+### ⚠️ Problèmes rencontrés
+* ❌ **Workflow CI/CD :** Erreurs d’installation de dépendances et problèmes de compatibilité avec les versions de Python.
+* ❌ **Faux Positifs :** Les `assert` de `pytest` ont été identifiés par GitHub Actions comme des erreurs de sécurité de sévérité **low**.
+* ❌ **Construction Docker :** Difficultés liées aux permissions système, aux chemins de fichiers internes et aux variables d'environnement.
+* ❌ **Runtime :** Bugs liés à la communication entre les composants (templates non trouvés ou erreurs d’import).
+
+### ✅ Solutions et contournements
+* 🔧 **Optimisation YAML :** Ajustement du workflow pour fixer la version de Python et fiabiliser le `pip install`.
+* 🔧 **Filtrage Sécurité :** Configuration du workflow pour ignorer le dossier de tests lors de l'analyse statique.
+* 🔧 **Hardening Docker :** Modification du Dockerfile pour assurer une copie correcte des fichiers et l'usage d'un utilisateur **non-root**.
+* 🔧 **Débogage Applicatif :** Correction itérative du code Python et des chemins vers les templates pour garantir le lancement.
+
+---
+
+## 📈 Roadmap & Améliorations (Prochaine itération)
+
+> [!IMPORTANT]
+> **Focus : Sécurité offensive et optimisation des ressources.**
+
+| Amélioration | Description | Impact |
+| :--- | :--- | :--- |
+| **🛡️ Images Alpine** | Utilisation de bases minimalistes pour réduire le poids. | **Sécurité ++** |
+| **🛡️ Validation Strict** | Contrôle des entrées API (longueur, types, format). | **Stabilité ++** |
+| **🛡️ Headers HTTP** | Ajout de headers de sécurité (ex: `X-Content-Type-Options`). | **Protection ++** |
+| **🛡️ Rate Limiting** | Limitation des requêtes par IP pour éviter les saturations. | **Disponibilité ++** |
+
+---
+*Dernière mise à jour : Janvier 2026*
