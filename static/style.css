@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=MedievalSharp&display=swap');
+
+:root {
+    --bois-sombre: #2c1a0b;
+    --bois-clair: #5d3a1a;
+    --parchemin: #e9d5a1;
+    --or: #f2e2ba;
+    --bordure: #8b5a2b;
+}
+
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: #1a0f06; font-family: 'MedievalSharp', cursive;
+    display: flex; justify-content: center; align-items: center; color: var(--or);
+}
+
+.screen { display: none; width: 100vw; height: 100vh; flex-direction: column; justify-content: center; align-items: center; }
+.screen.active { display: flex; }
+
+h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; text-shadow: 3px 3px 10px #000; margin-bottom: 20px; }
+
+.main-btn {
+    background: var(--bois-clair); color: var(--or); border: 3px solid var(--bordure);
+    padding: 15px 40px; font-family: 'Cinzel', serif; cursor: pointer;
+    box-shadow: 0 6px 0 #000; transition: 0.1s;
+}
+.main-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #000; }
+
+.quest-board {
+    display: flex; gap: 20px; width: 90%; max-width: 1200px; height: 70%;
+    background: rgba(0, 0, 0, 0.7); border: 5px solid var(--bois-sombre); padding: 20px;
+}
+
+.quest-board2 {
+    display: flex; flex-direction: column; gap: 20px; width: 90%; max-width: 1200px; height: 70%;
+    background: rgba(0, 0, 0, 0.7); border: 5px solid var(--bois-sombre); padding: 20px;
+}
+
+.column { flex: 1; display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.03); }
+.column h2 { 
+    font-family: 'Cinzel', serif; font-size: 1rem; margin: 0; padding: 12px;
+    background: var(--bois-sombre); border-bottom: 2px solid var(--bordure);
+}
+
+.ligne { flex: 2; display: flex; flex-direction: row; background: rgba(255, 255, 255, 0.03); align-items: flex-start; }
+.ligne h2 { 
+    font-family: 'Cinzel', serif; font-size: 1rem; margin: 0; padding: 12px;
+    background: var(--bois-sombre); border-bottom: 2px solid var(--bordure);
+}
+
+.scroll-zone { flex-grow: 1; padding: 15px; display: flex; flex-direction: column; gap: 12px; }
+
+/* --- CARTES --- */
+.quest-card {
+    background: var(--parchemin); color: #2d1b0d; padding: 12px;
+    border-left: 8px solid var(--bois-clair); box-shadow: 4px 4px 10px #000;
+    height: 28%; display: flex; flex-direction: column; justify-content: space-between;
+}
+.quest-card h3 { margin: 0; font-family: 'Cinzel', serif; font-size: 0.9rem; }
+.quest-card p { font-size: 0.8rem; margin: 5px 0; font-weight: bold; }
+
+.card-footer { display: flex; justify-content: space-between; align-items: center; }
+.quest-card button { background: var(--bois-sombre); color: white; border: none; padding: 5px 10px; cursor: pointer; }
+
+/* --- EFFET TERMINÉ (15s) --- */
+.status-done { color: #1e7e34; font-weight: bold; font-size: 0.8rem; }
+
+.quest-card.just-finished {
+    background: #d4edda;
+    border-left-color: #28a745;
+    animation: fadeOut 15s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1.02); }
+    80% { opacity: 1; }
+    100% { opacity: 0; transform: scale(0.95); }
+}
+
+.plus-badge {
+    margin-top: auto; padding: 8px; background: rgba(139, 90, 43, 0.2);
+    border: 1px dashed var(--bordure); font-size: 0.8rem; text-align: center;
+}
+
+.image-btn {
+    position: absolute;
+    right: 40px;
+    top: 40%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.image-btn img {
+    width: 120px; /* Ajuste comme tu veux */
+    height: auto;
+    border: 4px solid var(--bois-sombre);
+    box-shadow: 4px 4px 10px #000;
+}
+
+.image-btn2 {
+    position: absolute;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    left: 0;
+    margin-left: 3%;;
+}
+
+.image-btn2 img {
+    width: 120px; /* Ajuste comme tu veux */
+    height: auto;
+    border: 4px solid var(--bois-sombre);
+    box-shadow: 4px 4px 10px #000;
+}
+
+.ligne input, .ligne textarea {
+    width: 97.5%;             /* Largeur presque totale */
+    padding: 15px;          /* Espace intérieur (agrandit la zone) */
+    font-size: 1.2rem;      /* Texte plus grand pour mieux lire */
+    margin-top: 6vh;       /* Crée de l'espace par rapport au titre H2 */
+    margin-left: -8.3vw;;
+    background: var(--parchemin);
+    border: 3px solid var(--bois-sombre);
+    color: var(--bois-sombre);
+    font-family: 'MedievalSharp', cursive;
+}
+
+/* Spécifiquement pour la description (plus haute) */
+.ligne textarea {
+    height: 9vh;          /* Hauteur fixe plus grande */
+    resize: none;           /* Empêche l'utilisateur de déformer le cadre */
+}
+
+.ligne input {
+    margin-top: 8vh;
+}
+
+.ligne .espacement {
+    margin-top: 10vh;
+    margin-left: -10.6vw;
+}

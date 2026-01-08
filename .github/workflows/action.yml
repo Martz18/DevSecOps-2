@@ -1,0 +1,72 @@
+name: Github action pour Axel
+
+on:
+  push:
+    branches: [ "Axel" ]
+  pull_request:
+    branches: [ "Axel" ]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1. Récupération du code
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 3. Installation des outils (Versions figées)
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit==1.7.7 pip-audit==2.7.3 ruff==0.3.4 fastapi[all]
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: 4. Audit des dépendances (Pip-audit)
+        run: pip-audit -r requirements.txt
+
+      - name: 5. Analyse de sécurité du code (Bandit)
+        run: bandit -r . -v -x ./test_main.py
+
+      - name: 6. Vérification du style et erreurs (Ruff)
+        run: ruff check .
+
+      - name: 7. Connexion à Docker git
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 8. Construction de l'image (Locale pour Scan)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          tags: devsecops_2_guardia:test
+
+      - name: 9. Scan de l'image Docker (Trivy)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'devsecops_2_guardia:test'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+
+      - name: 10. Push de l'image sur Docker Hub
+        # Condition de sécurité ici
+        if: github.event_name != 'pull_request' && success()
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops_2_guardia:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/devsecops_2_guardia:${{ github.sha }}

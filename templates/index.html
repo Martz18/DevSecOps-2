@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>La Taverne du Dragon</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+    <section id="page-entree" class="screen active">
+        <h1>LA TAVERNE DU DRAGON</h1>
+        <button class="main-btn" onclick="ouvrirTaverne()">ENTRER DANS LA TAVERNE</button>
+    </section>
+
+    <section id="page-taverne" class="screen">
+        <h1>TABLEAU DES CONTRATS</h1>
+        <div class="quest-board">
+            <div class="column">
+                <h2>DISPONIBLES</h2>
+                <div id="available-quests" class="scroll-zone"></div>
+            </div>
+            <div class="column">
+                <h2>EN COURS</h2>
+                <div id="in-progress-quests" class="scroll-zone"></div>
+            </div>
+            <div class="column">
+                <h2>TERMINÉES</h2>
+                <div id="completed-quests" class="scroll-zone"></div>
+            </div>
+        </div>
+        <button class="image-btn" onclick="ouvrirPost()">
+            <img src="../static/images/arrow.png">
+        </button>
+    </section>
+
+    <section id="page-post" class="screen">
+        <h1>POSTER DES CONTRATS</h1>
+        <div class="quest-board2">
+            <div class="ligne">
+                <h2>NOM DE LA QUÊTE</h2>
+                <input type="text" id="quest-name" placeholder="Nom de la quête" class="espacement">
+            </div>
+            <div class="ligne">
+                <h2>DESCRIPTION</h2>
+                <textarea id="quest-desc" placeholder="Entrer la description de la quête"></textarea>
+            </div>
+            <div class="ligne">
+                <h2>RÉCOMPENSE</h2>
+                <input type="number" id="quest-reward" value="100">
+            </div>
+            <button class="main-btn" onclick="ajouterNouvelleQuete()">PUBLIER LE CONTRAT</button>
+        </div>
+        <button class="image-btn2" onclick="ouvrirTaverne2()">
+            <img src="../static/images/arrow2.png">
+        </button>
+    </section>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>
