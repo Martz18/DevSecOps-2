@@ -1,12 +1,6 @@
 # 🛡️ DevSecOps-2 | API « Tavernier – Gestionnaire de quêtes »
 
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
-
-[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)](https://www.docker.com/)
-
-[![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-black?logo=githubactions)](https://github.com/features/actions)
-
-[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)](https://www.docker.com/)
 [![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-black?logo=githubactions)](https://github.com/features/actions)
 
