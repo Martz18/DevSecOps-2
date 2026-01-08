@@ -8,7 +8,7 @@
 
 Ce projet a été réalisé dans le cadre du module **DevSecOps**. L'objectif est de mettre en pratique l'intégration continue, la livraison continue et la sécurité au sein d'un service applicatif Python containerisé.
 
-### 🍺 L'Application : Tavernier
+### 🍺 L'Application : Tavernier – Gestionnaire de quêtes
 L'application est une **API REST** baptisée **« La Taverne du Dragon »**. Elle plonge l'utilisateur dans un univers de jeu de rôle où il peut gérer les contrats d'une taverne. L'expérience se scinde en trois sections principales :
 
 1.  **La Porte de la Taverne (Accueil)** : La page d'entrée permettant d'accéder à l'interface de la taverne.
@@ -70,7 +70,7 @@ L’application utilise les composants suivants :
 * ❌ **Docker :** Difficultés liées aux permissions système et aux chemins de fichiers internes lors du build.
 * ❌ **Runtime :** Bugs de communication entre composants (templates introuvables ou erreurs d’import).
 
-### ✅ Solutions et contournements
+### ✅ Solutions ou contournements
 * 🔧 **Optimisation YAML :** Fixation de la version Python et fiabilisation de l'étape `pip install`.
 * 🔧 **Filtrage Sécurité :** Configuration du workflow pour ignorer le dossier `/test` lors de l'analyse statique.
 * 🔧 **Hardening Docker :** Modification du Dockerfile pour assurer l'usage d'un utilisateur **non-root**.
@@ -78,7 +78,7 @@ L’application utilise les composants suivants :
 
 ---
 
-## 📈 Roadmap & Améliorations (Prochaine itération)
+## 📈 Améliorations possibles (boucle suivante)
 
 > [!IMPORTANT]
 > **Focus : Sécurité offensive et durcissement des données.**
