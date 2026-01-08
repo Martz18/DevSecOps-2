@@ -14,6 +14,8 @@ L'application est une **API REST** baptisée **« Tavernier – Gestionnaire de 
 1.  **La Porte de la Taverne (Accueil)** : La page d'entrée permettant d'accéder à l'interface de la taverne.
 2.  **Le Gestionnaire de Quêtes** : Le cœur de l'application. Cette page affiche les quêtes disponibles, permet de les accepter et de les marquer comme accomplies.
 3.  **Le Tableau d'Affichage (Poster une quête)** : Accessible depuis le gestionnaire, cette page permet de soumettre de nouveaux contrats en précisant le **nom**, la **description** et le **montant de la récompense**.
+    <img width="2559" height="1393" alt="image" src="https://github.com/user-attachments/assets/2b7c5496-7be4-4dc3-a6de-49c36bc1f3e0" />
+
 
 ### 💾 Gestion des données
 Pour la persistance, l'application utilise une **base de données temporaire** (dictionnaire/liste) directement codée en Python. 
