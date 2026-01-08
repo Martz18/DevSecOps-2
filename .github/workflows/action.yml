@@ -30,12 +30,12 @@ jobs:
         run: pip-audit -r requirements.txt
 
       - name: 5. Analyse de sécurité du code (Bandit)
-        run: bandit -r . -v -x ./templates
+        run: bandit -r . -v -x ./test_main.py
 
       - name: 6. Vérification du style et erreurs (Ruff)
         run: ruff check .
 
-      - name: 7. Connexion à Docker Hub
+      - name: 7. Connexion à Docker git
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v3
         with:
@@ -58,7 +58,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH,MEDIUM,LOW'
+          severity: 'CRITICAL,HIGH,MEDIUM, LOW'
 
       - name: 10. Push de l'image sur Docker Hub
         # Condition de sécurité ici
