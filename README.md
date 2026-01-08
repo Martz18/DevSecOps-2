@@ -1,4 +1,10 @@
-# 🛡️ DevSecOps-2 | API Python & Docker
+# 🛡️ DevSecOps-2 | API « Tavernier – Gestionnaire de quêtes »
+
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
+
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)](https://www.docker.com/)
+
+[![GitHub Actions](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-black?logo=githubactions)](https://github.com/features/actions)
 
 [![Python Version](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)](https://www.docker.com/)
@@ -8,20 +14,28 @@
 
 Ce projet a été réalisé dans le cadre du module **DevSecOps**. L'objectif est de mettre en pratique l'intégration continue, la livraison continue et la sécurité au sein d'un service applicatif Python containerisé.
 
-**Objectifs principaux :**
-* 🐍 Développer une application simple en Python.
-* 🐳 Exécuter l'application dans un conteneur Docker.
-* ⚙️ Automatiser les vérifications (tests, qualité, sécurité) via GitHub Actions.
+### 🍺 L'Application : Tavernier
+L'application est une **API REST** baptisée **« Tavernier – Gestionnaire de quêtes »**. Elle plonge l'utilisateur dans un univers de jeu de rôle où il peut gérer les contrats d'une taverne. L'expérience se scinde en trois sections principales :
+
+1.  **La Porte de la Taverne (Accueil)** : La page d'entrée permettant d'accéder à l'interface de la taverne.
+2.  **Le Gestionnaire de Quêtes** : Le cœur de l'application. Cette page affiche les quêtes disponibles, permet de les accepter et de les marquer comme accomplies.
+3.  **Le Tableau d'Affichage (Poster une quête)** : Accessible depuis le gestionnaire, cette page permet de soumettre de nouveaux contrats en précisant le **nom**, la **description** et le **montant de la récompense**.
+
+### 💾 Gestion des données
+Pour la persistance, l'application utilise une **base de données temporaire** (dictionnaire/liste) directement codée en Python. 
+* Les quêtes initiales sont chargées au lancement.
+* Les nouvelles quêtes postées via l'interface sont ajoutées dynamiquement à cette structure de données.
+* L'affichage est mis à jour en temps réel sur la page du gestionnaire.
 
 ---
 
 ## 🏗️ Fonctionnement global
 
 L’application utilise les composants suivants :
-* **Logique :** `main.py` pour le code principal et `requirements.txt` pour les dépendances.
-* **Interface :** Un dossier `templates/` pour le HTML, avec un dossier `static/` pour le CSS et le JS.
-* **Containerisation :** Un `Dockerfile` définissant l'image d'exécution.
-* **Automatisation :** Un workflow GitHub Actions qui s'exécute à chaque *push* pour valider le code et builder l'image.
+* **Logique :** `main.py` (API et gestion de la base temporaire) et `requirements.txt`.
+* **Interface :** Dossier `templates/` pour le HTML, avec `static/` pour le CSS et le JS.
+* **Containerisation :** Un `Dockerfile` optimisé pour la sécurité.
+* **Automatisation :** Workflow GitHub Actions pour valider le code et builder l'image.
 
 ---
 
@@ -37,10 +51,10 @@ L’application utilise les composants suivants :
 
 2.  **Lancer le conteneur** :
     ```bash
-    docker run --rm -d -p 5678:5678 --name devsecops-app croustiii/devsecops_2_guardia
+    docker run --rm -d -p 5678:5678 --name tavernier-app croustiii/devsecops_2_guardia
     ```
 
-3.  **Accéder au service** :
+3.  **Entrer dans la taverne** :
     > 🌐 URL locale : [http://localhost:5678](http://localhost:5678)
 
 ---
@@ -48,30 +62,28 @@ L’application utilise les composants suivants :
 ## 🛠️ Analyse Post-Déploiement
 
 ### ⚠️ Problèmes rencontrés
-* ❌ **Workflow CI/CD :** Erreurs d’installation de dépendances et problèmes de compatibilité avec les versions de Python.
-* ❌ **Faux Positifs :** Les `assert` de `pytest` ont été identifiés par GitHub Actions comme des erreurs de sécurité de sévérité **low**.
-* ❌ **Construction Docker :** Difficultés liées aux permissions système, aux chemins de fichiers internes et aux variables d'environnement.
-* ❌ **Runtime :** Bugs liés à la communication entre les composants (templates non trouvés ou erreurs d’import).
+* ❌ **Workflow CI/CD :** Erreurs d’installation de dépendances et problèmes de compatibilité Python dans GitHub Actions.
+* ❌ **Faux Positifs :** Les `assert` de `pytest` identifiés comme des failles de sécurité de sévérité **low**.
+* ❌ **Docker :** Difficultés liées aux permissions système et aux chemins de fichiers internes lors du build.
+* ❌ **Runtime :** Bugs de communication entre composants (templates introuvables ou erreurs d’import).
 
 ### ✅ Solutions et contournements
-* 🔧 **Optimisation YAML :** Ajustement du workflow pour fixer la version de Python et fiabiliser le `pip install`.
-* 🔧 **Filtrage Sécurité :** Configuration du workflow pour ignorer le dossier de tests lors de l'analyse statique.
-* 🔧 **Hardening Docker :** Modification du Dockerfile pour assurer une copie correcte des fichiers et l'usage d'un utilisateur **non-root**.
-* 🔧 **Débogage Applicatif :** Correction itérative du code Python et des chemins vers les templates pour garantir le lancement.
+* 🔧 **Optimisation YAML :** Fixation de la version Python et fiabilisation de l'étape `pip install`.
+* 🔧 **Filtrage Sécurité :** Configuration du workflow pour ignorer le dossier `/test` lors de l'analyse statique.
+* 🔧 **Hardening Docker :** Modification du Dockerfile pour assurer l'usage d'un utilisateur **non-root**.
+* 🔧 **Débogage Applicatif :** Correction des chemins relatifs vers les templates pour garantir le rendu des pages.
 
 ---
 
-## 📈 Améliorations possibles (boucle suivante)
+## 📈 Roadmap & Améliorations (Prochaine itération)
 
 > [!IMPORTANT]
-> **Focus : Sécurité offensive et optimisation des ressources.**
+> **Focus : Sécurité offensive et durcissement des données.**
 
-| Amélioration | Description | Impact |
-| :--- | :--- | :--- |
-| **🛡️ Images Alpine** | Utilisation de bases minimalistes pour réduire le poids. | **Sécurité ++** |
-| **🛡️ Validation Strict** | Contrôle des entrées API (longueur, types, format). | **Stabilité ++** |
-| **🛡️ Headers HTTP** | Ajout de headers de sécurité (ex: `X-Content-Type-Options`). | **Protection ++** |
-| **🛡️ Rate Limiting** | Limitation des requêtes par IP pour éviter les saturations. | **Disponibilité ++** |
+* **🛡️ Images Minimalistes** : Passage sur une base **Alpine** pour réduire la surface d'attaque.
+* **🛡️ Validation Strict** : Contrôle des entrées sur le formulaire de quête (type, longueur du texte, montant positif).
+* **🛡️ Headers de Sécurité** : Injection de headers HTTP (ex: `X-Content-Type-Options`) pour protéger le client.
+* **🛡️ Rate Limiting** : Limitation des requêtes pour éviter que la base temporaire ne soit saturée par des scripts.
 
 ---
 *Dernière mise à jour : Janvier 2026*
