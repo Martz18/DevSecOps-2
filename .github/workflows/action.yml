@@ -2,9 +2,9 @@ name: Github action pour Axel
 
 on:
   push:
-    branches: [ "Axel" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "Axel" ]
+    branches: [ "main" ]
 
 jobs:
   pipeline:
